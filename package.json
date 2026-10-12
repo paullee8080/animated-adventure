@@ -1,0 +1,21 @@
+{
+  "name": "hands-free-translator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hands-free English <-> Chinese live conversation translator (Azure Speech + Claude). Stores nothing.",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "microsoft-cognitiveservices-speech-sdk": "^1.52.0"
+  }
+}

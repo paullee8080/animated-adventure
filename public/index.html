@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111418">
+  <meta name="referrer" content="no-referrer">
+  <title>Live Translator · 实时翻译</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="split" id="split">
+    <!-- Top half: read by the Chinese speaker (rotated on phones). -->
+    <section class="half half-zh" lang="zh" aria-label="Chinese speaker">
+      <p class="caption">对方说 · 對方說</p>
+      <p class="translation" id="zh-translation" aria-live="polite">按 “Start” 开始对话</p>
+      <p class="original" id="zh-original"></p>
+      <p class="live" id="zh-live" aria-hidden="true"></p>
+    </section>
+
+    <div class="bar">
+      <div class="status" id="status" data-state="paused">
+        <span class="dot" aria-hidden="true"></span>
+        <span id="status-label">Paused · 已暂停</span>
+      </div>
+      <div class="bar-actions">
+        <button type="button" class="btn btn-primary" id="toggle">Start conversation</button>
+        <button type="button" class="btn btn-icon" id="open-settings" aria-label="Settings">⚙</button>
+      </div>
+    </div>
+
+    <!-- Bottom half: read by the English speaker. -->
+    <section class="half half-en" lang="en" aria-label="English speaker">
+      <p class="caption">They said</p>
+      <p class="translation" id="en-translation" aria-live="polite">Tap “Start conversation”, then just talk.</p>
+      <p class="original" id="en-original" lang="zh"></p>
+      <p class="live" id="en-live" aria-hidden="true"></p>
+    </section>
+  </main>
+
+  <div class="error" id="error" role="alert" hidden>
+    <span id="error-text"></span>
+    <button type="button" class="btn btn-small" id="error-close" aria-label="Dismiss">✕</button>
+  </div>
+
+  <dialog id="settings">
+    <form method="dialog">
+      <h2>Settings</h2>
+      <fieldset>
+        <legend>Chinese speaker talks in</legend>
+        <label><input type="radio" name="dialect" value="mandarin" checked> Mandarin 普通话</label>
+        <label><input type="radio" name="dialect" value="cantonese"> Cantonese 廣東話</label>
+      </fieldset>
+      <fieldset>
+        <legend>Chinese text</legend>
+        <label><input type="radio" name="script" value="simplified" checked> Simplified 简体</label>
+        <label><input type="radio" name="script" value="traditional"> Traditional 繁體</label>
+      </fieldset>
+      <label class="switch"><input type="checkbox" name="tts" checked> Read translations aloud</label>
+      <p class="note">Nothing is saved. Audio goes to Azure Speech and text goes to Anthropic only to be processed; the transcript lives in this page's memory and is wiped when you press Stop, refresh or close it.</p>
+      <div class="dialog-actions"><button class="btn btn-primary" value="done">Done</button></div>
+    </form>
+  </dialog>
+
+  <script src="/vendor/microsoft.cognitiveservices.speech.sdk.bundle-min.js"></script>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
